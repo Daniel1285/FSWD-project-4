@@ -4,33 +4,29 @@ import Toolbar from './Toolbar';
 import EditControls from './EditControls';
 import VirtualKeyboard from './VirtualKeyboard';
 import StorageControls from './StorageControls';
+import TextCard from './TextCard';
 
 export default function TextEditor() {
-  // The array of characters with styles
-  const [text, setText] = useState([]);
+  
+  const [texts, setTexts] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(null);
 
   // Current style settings applied to new characters
   const [currentStyle, setCurrentStyle] = useState({
-    color: '#000000',
+    color: '#000',
     fontSize: '16px',
     fontFamily: 'Arial',
   });
-
+  
   // Keyboard mode states
   const [language, setLanguage] = useState('he');
   const [emojiMode, setEmojiMode] = useState(false);
   const [symbolMode, setSymbolMode] = useState(false);
   const [emojiOverlayVisible, setEmojiOverlayVisible] = useState(false);
   const [shiftMode, setShiftMode] = useState('off'); // 'off' or 'once' or 'locked'
-
-  // Text history for undo support
-  const [history, setHistory] = useState([]);
-
-  // Search character
-  const [searchChar, setSearchChar] = useState(null);
-
-  // 'current' or 'all'
-  const [styleMode, setStyleMode] = useState('current');
+  const [history, setHistory] = useState([]); // Text history for undo support
+  const [searchChar, setSearchChar] = useState(null); // Search character
+  const [styleMode, setStyleMode] = useState('current'); // 'current' or 'all'
 
   const handleShiftClick = (type) => {
     if (type === 'single') {
@@ -41,93 +37,166 @@ export default function TextEditor() {
   };
 
   const handleSearch = () => {
-    const target = prompt('Enter character to search for:');
+    if (activeIndex === null) return;
+    const target = prompt('Search character:');
     if (!target || target.length !== 1) return;
-  
-    const normalized = target.toLowerCase();
-    const hasMatch = text.some((item) => item.char.toLowerCase() === normalized);
-  
-    if (hasMatch) {
-      setSearchChar(normalized);
-    } else {
-      alert(`No matches found for "${target}"`);
+    const found = texts[activeIndex].content.some(
+      item => item.char.toLowerCase() === target.toLowerCase()
+    );
+    if (!found) {
+      alert('No matches found.');
       setSearchChar(null);
+    } else {
+      setSearchChar(target.toLowerCase());
     }
   };
   
-  const handleClearSearch = () => {
-    setSearchChar(null);
-  };
+  const handleClearSearch = () => setSearchChar(null);
 
+  // Handle style changes for the current text or all texts
   const handleStyleChange = (style) => {
     if (styleMode === 'current') {
       setCurrentStyle(prev => ({ ...prev, ...style }));
-    } else {
-      // Apply style to all text
-      setText(prevText =>
-        prevText.map(char => ({
-          ...char,
-          style: { ...char.style, ...style }
-        }))
-      );
+    } else if (activeIndex !== null) {
+      const updated = [...texts];
+      updated[activeIndex].content = updated[activeIndex].content.map(char => ({
+        ...char,
+        style: { ...char.style, ...style },
+      }));
+      setTexts(updated);
       setCurrentStyle(prev => ({ ...prev, ...style }));
     }
   };
 
   const handleKeyPress = (char) => {
-    const styledChar = { char, style: currentStyle };
-    setHistory([...history, [...text]]);
-    setText([...text, styledChar]);
+    if (activeIndex === null) return;
+    const newChar = { char, style: currentStyle };
+    const updated = [...texts];
+    updated[activeIndex].content.push(newChar);
+    setTexts(updated);
+    setHistory([...history, JSON.parse(JSON.stringify(updated))]);
     setEmojiOverlayVisible(false);
   };
 
-  const handleDelete = (type) => {
-    setHistory([...history, [...text]]);
-    if (type === 'char') {
-      setText(text.slice(0, -1));
-    } else if (type === 'word') {
-      let newText = [...text];
-      while (newText.length && newText[newText.length - 1].char !== ' ') {
-        newText.pop();
+  // Add new text area
+  const handleNewText = () => {
+    const newText = {
+      id: Date.now(),
+      title: `Text ${texts.length + 1}`,
+      content: [],
+    };
+    setTexts([...texts, newText]);
+    setActiveIndex(texts.length);
+  };
+
+  // Close text area
+  const handleCloseText = (index) => {
+    const shouldSave = window.confirm('Do you want to save before closing?');
+    if (shouldSave) {
+      const fileName = prompt('Enter file name to save:');
+      if (fileName) {
+        localStorage.setItem(fileName, JSON.stringify(texts[index].content));
+        alert(`Saved as "${fileName}"`);
       }
-      if (newText.length) newText.pop(); // remove space
-      setText(newText);
+    }
+    const updated = texts.filter((_, i) => i !== index);
+    setTexts(updated);
+    if (activeIndex === index) {
+      setActiveIndex(null);
+    } else if (activeIndex > index) {
+      setActiveIndex(activeIndex - 1);
     }
   };
 
+  // Handle delete character or word
+  const handleDelete = (type) => {
+    if (activeIndex === null) return;
+    const updated = [...texts];
+    if (type === 'char') {
+      updated[activeIndex].content.pop();
+    } else if (type === 'word') {
+      while (
+        updated[activeIndex].content.length &&
+        updated[activeIndex].content.at(-1).char !== ' '
+      ) {
+        updated[activeIndex].content.pop();
+      }
+      updated[activeIndex].content.pop();
+    }
+    setTexts(updated);
+    setHistory([...history, JSON.parse(JSON.stringify(updated))]);
+  };
+
   const handleClear = () => {
-    setHistory([...history, [...text]]);
-    setText([]);
+    if (activeIndex === null) return;
+    const updated = [...texts];
+    updated[activeIndex].content = [];
+    setTexts(updated);
   };
 
   const handleUndo = () => {
     if (history.length > 0) {
-      setText(history[history.length - 1]);
+      const prev = history[history.length - 1];
+      setTexts(prev);
       setHistory(history.slice(0, -1));
     }
   };
 
   const handleReplace = () => {
-    const toFind = prompt('Enter character to replace:');
-    const toReplace = prompt(`Replace "${toFind}" with:`);
-    const updated = text.map((item) =>
-      item.char === toFind ? { ...item, char: toReplace } : item
+    if (activeIndex === null) return;
+    const target = prompt('Enter character to replace:');
+    const toReplace = prompt('Replace with:');
+    const updated = [...texts];
+    updated[activeIndex].content = updated[activeIndex].content.map(item =>
+      item.char === target ? { ...item, char: toReplace } : item
     );
-    setHistory([...history, [...text]]);
-    setText(updated);
+    setTexts(updated);
+  };
+
+  const handleOpenNewText = (newContent) => {
+    const newText = {
+      id: Date.now(),
+      title: `Text ${texts.length + 1}`,
+      content: newContent,
+    };
+    setTexts([...texts, newText]);
+    setActiveIndex(texts.length);
   };
 
   const cycleLanguage = () => {
-    setLanguage((prev) => (prev === 'he' ? 'en' : 'he'));
+    setLanguage(prev => (prev === 'he' ? 'en' : 'he'));
+  };
+
+  const handleUpdateTextContent = (index, newContent) => {
+    const updated = [...texts];
+    updated[index].content = newContent;
+    setTexts(updated);
   };
 
   return (
     <div className="text-editor">
 
-      {/* Output area showing styled text */}
-      <TextDisplay text={text} searchChar={searchChar} />
+      <div className="text-list" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+        {texts.map((text, i) => (
+          <TextCard
+            key={text.id}
+            index={i}
+            text={text}
+            isActive={i === activeIndex}
+            onSelect={setActiveIndex}
+            onClose={handleCloseText}
+            searchChar={searchChar}
+            onUpdateContent={handleUpdateTextContent}
+          />
+        ))}
 
-      {/* Styling toolbar: font, size, color */}
+        <div className="text-card add-card" onClick={handleNewText}>
+            <div className="card-header" style={{ justifyContent: 'center' }}>
+              ➕ Add Text
+            </div>
+        </div>
+      </div>
+
       <Toolbar
         currentStyle={currentStyle}
         setStyle={handleStyleChange}
@@ -135,14 +204,14 @@ export default function TextEditor() {
         setStyleMode={setStyleMode}
       />
 
-      {/* Virtual keyboard with all modes */}
       <VirtualKeyboard
         language={language}
         emojiMode={emojiMode}
         symbolMode={symbolMode}
-        emojiOverlayVisible={emojiOverlayVisible}
+        shiftMode={shiftMode}
         onKeyPress={handleKeyPress}
         onCycleLanguage={cycleLanguage}
+        onShiftClick={handleShiftClick}
         onToggleEmojiMode={() => {
           setEmojiMode(!emojiMode);
           setSymbolMode(false);
@@ -151,17 +220,11 @@ export default function TextEditor() {
           setSymbolMode(!symbolMode);
           setEmojiMode(false);
         }}
-        onHoverEmojiButton={() => {
-          if (!emojiMode) setEmojiOverlayVisible(true);
-        }}
-        onLeaveEmojiButton={() => {
-          if (!emojiMode) setEmojiOverlayVisible(false);
-        }}
-        shiftMode={shiftMode}
-        onShiftClick={handleShiftClick}
+        onHoverEmojiButton={() => !emojiMode && setEmojiOverlayVisible(true)}
+        onLeaveEmojiButton={() => !emojiMode && setEmojiOverlayVisible(false)}
+        emojiOverlayVisible={emojiOverlayVisible}
       />
 
-      {/* Text editing operations */}
       <EditControls
         onDelete={handleDelete}
         onUndo={handleUndo}
@@ -171,7 +234,6 @@ export default function TextEditor() {
         onClearSearch={handleClearSearch}
         isSearching={!!searchChar}
       />
-      <StorageControls text={text} setText={setText} />
     </div>
   );
 }

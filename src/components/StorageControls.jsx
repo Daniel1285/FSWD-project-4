@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function StorageControls({ text, setText }) {
+function StorageControls({ text, onOpenNewText }) {
   const [fileName, setFileName] = useState('');
 
   const handleSave = () => {
@@ -17,7 +17,9 @@ function StorageControls({ text, setText }) {
     if (!fileName) return alert('Please enter a file name');
     const saved = localStorage.getItem(fileName);
     if (!saved) return alert('No such file found');
-    setText(JSON.parse(saved));
+    const content = JSON.parse(saved);
+
+    onOpenNewText(content);
   };
 
   return (
