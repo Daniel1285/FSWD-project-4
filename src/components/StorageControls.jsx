@@ -1,23 +1,40 @@
 import React, { useState } from 'react';
 
-function StorageControls({ text, onOpenNewText }) {
+function StorageControls({ text, onOpenNewText}) {
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   const [fileName, setFileName] = useState('');
 
+  const getUserKey = () => {
+    if (!currentUser) return null;
+    return `docs-${currentUser.username || currentUser.email}`;
+  };
+
   const handleSave = () => {
+    const userKey = getUserKey();
+    if (!userKey) return alert('User not logged in');
     if (!fileName) return alert('Please enter a file name');
-    const isExist = localStorage.getItem(fileName);
-    if (!isExist){
-        localStorage.setItem(fileName, JSON.stringify(text));
-        alert(`Saved as "${fileName}"`);
+
+    const userDocs = JSON.parse(localStorage.getItem(userKey)) || {};
+    if (userDocs[fileName]) {
+      return alert(`File "${fileName}" already exists!`);
     }
-    return alert(`File "${fileName}" is already exists!`);
+
+    userDocs[fileName] = text;
+    localStorage.setItem(userKey, JSON.stringify(userDocs));
+    alert(`Saved as "${fileName}"`);
   };
 
   const handleLoad = () => {
+    const userKey = getUserKey();
+    if (!userKey) return alert('User not logged in');
     if (!fileName) return alert('Please enter a file name');
-    const saved = localStorage.getItem(fileName);
-    if (!saved) return alert('No such file found');
-    const content = JSON.parse(saved);
+
+    const userDocs = JSON.parse(localStorage.getItem(userKey)) || {};
+    const content = userDocs[fileName];
+
+    if (!content) {
+      return alert(`No such file "${fileName}" found for current user`);
+    }
 
     onOpenNewText(content);
   };

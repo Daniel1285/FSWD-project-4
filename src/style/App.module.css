@@ -1,0 +1,36 @@
+.appContainer {
+    height: 10rem;
+    background: #f0f2f5;
+    position: relative;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .topRight {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+  }
+  
+  .loginBtn {
+    padding: 8px 18px;
+    background-color: #4a90e2;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .popupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  
