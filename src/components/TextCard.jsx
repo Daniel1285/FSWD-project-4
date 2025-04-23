@@ -1,9 +1,9 @@
 import React from 'react';
 import TextDisplay from './TextDisplay';
 import StorageControls from './StorageControls';
+import style from '../style/TextCard.module.css';
 
 export default function TextCard(props) {
-
   const {
     text,
     index,
@@ -16,10 +16,10 @@ export default function TextCard(props) {
 
   return (
     <div
-      className={`text-card ${isActive ? 'active' : ''}`}
+      className={`${style.textCard} ${isActive ? style.active : ''}`}
       onClick={() => onSelect(index)}
     >
-      <div className="card-header">
+      <div className={style.cardHeader}>
         <strong>{text.title}</strong>
         <button onClick={(e) => {
           e.stopPropagation(); // Prevents unintended card selection
@@ -28,6 +28,7 @@ export default function TextCard(props) {
           ❌
         </button>
       </div>
+
       <TextDisplay text={text.content} searchChar={searchChar} />
 
       <StorageControls

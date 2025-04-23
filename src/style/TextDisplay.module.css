@@ -1,0 +1,15 @@
+.textDisplay {
+    padding: 12px;
+    min-height: 120px;
+    border: 1px solid #ccc;
+    font-size: 1.2em;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    background: #fafafa;
+    margin-bottom: 12px;
+  }
+  
+  .highlightedChar {
+    background-color: yellow;
+    border-radius: 3px;
+  }  

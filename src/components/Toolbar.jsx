@@ -1,4 +1,5 @@
 import React from 'react';
+import style from '../style/Toolbar.module.css';
 
 export default function Toolbar({ currentStyle, setStyle, currentMode, setStyleMode }) {
 
@@ -24,7 +25,7 @@ export default function Toolbar({ currentStyle, setStyle, currentMode, setStyleM
       setStyle({ fontSize: `${nextSize}px` });
     }
   };
-  
+
   const decreaseFontSize = () => {
     const current = parseInt(currentStyle.fontSize || '16');
     const index = fontSizes.findIndex(s => s === current);
@@ -35,7 +36,7 @@ export default function Toolbar({ currentStyle, setStyle, currentMode, setStyleM
   };
 
   return (
-    <div className="toolbar">
+    <div className={style.toolbar}>
       <select onChange={handleFontChange}>
         <option value="Arial">Arial</option>
         <option value="Times New Roman">Times New Roman</option>
@@ -58,7 +59,7 @@ export default function Toolbar({ currentStyle, setStyle, currentMode, setStyleM
 
       <input type="color" onChange={handleColorChange} />
 
-      <div className="style-mode-toggle">
+      <div className={style.styleModeToggle}>
         <label>
           <input
             type="radio"

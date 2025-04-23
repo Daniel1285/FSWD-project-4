@@ -1,4 +1,5 @@
 import React from 'react';
+import style from '../style/VirtualKeyboard.module.css';
 
 const keyboards = {
   en: [
@@ -20,12 +21,12 @@ const keyboards = {
   ],
 
   emoji: ['😀','😎','🔥','❤️','🎉','👀','💻','🚀','🌟','🤖',
-          '🥲','😂','👍','🎂','🙏','😍','😅','😭','🙌','😡']
+          '🥲','😂','👍','🎂','🙏','😍','😅','😭','🙌','😡',
+          '👋','💔','🎈','🌈','✨','🍕','🍔','🍣','🍩','🍪',]
 };
 
 export default function VirtualKeyboard(props) {
-
-    const {
+  const {
     language,
     emojiMode,
     symbolMode,
@@ -48,16 +49,14 @@ export default function VirtualKeyboard(props) {
 
   const rows = [];
   if (emojiMode || symbolMode) {
-    // Group emoji or symbol keyboard into rows of 10
     for (let i = 0; i < keys.length; i += 10) {
       rows.push(keys.slice(i, i + 10));
     }
   } else if (language === 'he') {
-    rows.push(keys.slice(0, 8));   // top
-    rows.push(keys.slice(8, 18));  // middle
-    rows.push(keys.slice(18));     // bottom
+    rows.push(keys.slice(0, 8));
+    rows.push(keys.slice(8, 18));
+    rows.push(keys.slice(18));
   } else {
-    // English layout (QWERTY)
     rows.push(keys.slice(0, 10));
     rows.push(keys.slice(10, 19));
     rows.push(keys.slice(19));
@@ -69,10 +68,11 @@ export default function VirtualKeyboard(props) {
         shiftMode !== 'off' && /^[a-zA-Z]$/.test(char)
           ? char.toUpperCase()
           : char;
-  
+
       return (
         <button
           key={i}
+          className={style.keyboardButton}
           onClick={() => {
             onKeyPress(displayChar);
             if (shiftMode === 'once') {
@@ -84,17 +84,16 @@ export default function VirtualKeyboard(props) {
         </button>
       );
     });
-  
-    if (isBottomRow && language === 'en') {
-      let shiftIcon = '⇧'; // default
 
+    if (isBottomRow && language === 'en') {
+      let shiftIcon = '⇧';
       if (shiftMode === 'locked') shiftIcon = '⇪';
       else if (shiftMode === 'once') shiftIcon = '⬆';
 
       buttons.unshift(
         <button
           key="shift"
-          className={shiftMode !== 'off' ? 'shift-active' : ''}
+          className={`${style.keyboardButton} ${shiftMode !== 'off' ? style.shiftActive : ''}`}
           onClick={() => onShiftClick('single')}
           onDoubleClick={() => onShiftClick('double')}
         >
@@ -102,47 +101,46 @@ export default function VirtualKeyboard(props) {
         </button>
       );
     }
-  
-    return <div key={rowIndex} className="keyboard-row">{buttons}</div>;
+
+    return <div key={rowIndex} className={style.keyboardRow}>{buttons}</div>;
   };
 
   return (
-    <div className="keyboard">
+    <div className={style.keyboard}>
       {rows.map((row, rowIndex) =>
         renderRow(row, rowIndex, rowIndex === rows.length - 1, language)
       )}
 
-      <div className="keyboard-row">
+      <div className={style.keyboardRow}>
         {!emojiMode && (
-          <button onClick={onCycleLanguage}>🌐</button>
+          <button className={style.keyboardButton} onClick={onCycleLanguage}>🌐</button>
         )}
 
-        <button className="spacebar" onClick={() => onKeyPress(' ')}>
+        <button className={style.spacebar} onClick={() => onKeyPress(' ')}>
           ⎵
         </button>
 
-        <div>
-          <button className="symbol-toggle" onClick={onToggleSymbolMode}>
-            {symbolMode ? '⌨️' : '?123'}
-          </button>
-        </div>
+        <button className={style.symbolToggle} onClick={onToggleSymbolMode}>
+          {symbolMode ? '⌨️' : '?123'}
+        </button>
 
         <div
-          className="emoji-hover-container"
+          className={style.emojiHoverContainer}
           onMouseEnter={onHoverEmojiButton}
           onMouseLeave={onLeaveEmojiButton}
         >
-          <button className="emoji-toggle" onClick={onToggleEmojiMode}>
+          <button className={style.emojiToggle} onClick={onToggleEmojiMode}>
             {emojiMode ? '⌨️' : (
               <span className="material-symbols-outlined">add_reaction</span>
             )}
           </button>
 
           {emojiOverlayVisible && !emojiMode && (
-            <div className="emoji-overlay">
+            <div className={style.emojiOverlay}>
               {['😂','❤️','🔥','👍','🥲'].map((emoji, index) => (
                 <button
                   key={index}
+                  className={style.keyboardButton}
                   onClick={() => onKeyPress(emoji)}
                 >
                   {emoji}

@@ -1,0 +1,48 @@
+.toolbar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  
+  .toolbar select,
+  .toolbar button,
+  .toolbar input[type="color"] {
+    padding: 6px 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .toolbar input[type="color"] {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background: none;
+    vertical-align: middle;
+    margin-top: 3px;
+  }
+  
+  .toolbar button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .styleModeToggle {
+    display: flex;
+    gap: 12px;
+    margin-left: 12px;
+    align-items: center;
+  }
+  
+  .styleModeToggle label {
+    font-size: 12px;
+    cursor: pointer;
+  }
+  

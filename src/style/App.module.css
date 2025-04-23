@@ -1,3 +1,10 @@
+body {
+  font-family: Arial;
+  direction: rtl;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
 .appContainer {
     height: 10rem;
     background: #f0f2f5;

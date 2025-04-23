@@ -1,0 +1,40 @@
+.textEditor {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .textList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .addCard {
+    width: 280px;
+    min-height: 200px;
+    border: 2px dashed #aaa;
+    background-color: #f9f9f9;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s;
+  }
+  
+  .addCard:hover {
+    background-color: #e7f1ff;
+  }
+  
+  .cardHeader {
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+  }  

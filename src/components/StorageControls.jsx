@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import style from '../style/StorageControls.module.css';
 
-function StorageControls({ text, onOpenNewText}) {
+function StorageControls({ text, onOpenNewText }) {
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   const [fileName, setFileName] = useState('');
 
@@ -40,7 +41,7 @@ function StorageControls({ text, onOpenNewText}) {
   };
 
   return (
-    <div className="storage-controls">
+    <div className={style.storageControls}>
       <input
         type="text"
         placeholder="File name"

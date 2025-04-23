@@ -1,8 +1,9 @@
 import React from 'react';
+import style from '../style/TextDisplay.module.css';
 
 export default function TextDisplay({ text, searchChar }) {
   return (
-    <div className="text-display">
+    <div className={style.textDisplay}>
       {text.map((item, index) => (
         <span
           key={index}
@@ -10,11 +11,10 @@ export default function TextDisplay({ text, searchChar }) {
           className={
             searchChar &&
             item.char.toLowerCase() === searchChar
-              ? 'highlighted-char'
+              ? style.highlightedChar
               : ''
           }
         >
-          
           {item.char}
         </span>
       ))}

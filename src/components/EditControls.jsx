@@ -1,17 +1,26 @@
 import React from 'react';
+import style from '../style/EditControls.module.css';
 
-export default function EditControls({ onDelete, onUndo, onReplace, onClear, onSearch, onClearSearch, isSearching }) {
+export default function EditControls({
+  onDelete,
+  onUndo,
+  onReplace,
+  onClear,
+  onSearch,
+  onClearSearch,
+  isSearching
+}) {
   return (
-    <div className="edit-controls">
+    <div className={style.editControls}>
       <button onClick={() => onDelete('char')}>⌫ Delete Char</button>
-      <button onClick={() => onDelete('word')}>⌫ Delete Word</button>
+      <button onClick={() => onDelete('word')}>⎚ Delete Word</button>
+      <button onClick={onUndo}>↶ Undo</button>
+      <button onClick={onReplace}>♻ Replace</button>
       <button onClick={onClear}>🧹 Clear All</button>
-      <button onClick={onUndo}>↩️ Undo</button>
-      <button onClick={onReplace}>🔁 Replace</button>
-      {isSearching ? (
-        <button onClick={onClearSearch} title="Clear Search">❌</button>
+      {!isSearching ? (
+        <button onClick={onSearch}>🔍 Search</button>
       ) : (
-        <button onClick={onSearch} title="Search Character">🔍</button>
+        <button onClick={onClearSearch}>❌ Clear Search</button>
       )}
     </div>
   );
