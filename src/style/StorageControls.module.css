@@ -1,28 +1,46 @@
 .storageControls {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 8px;
-    flex-wrap: wrap;
-  }
-  
-  .storageControls input {
-    padding: 6px 8px;
-    font-size: 14px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
-  
-  .storageControls button {
-    padding: 6px 12px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: white;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .storageControls button:hover {
-    background-color: #f0f0f0;
-  }  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.storageControls input {
+  flex: 1 1 100%;
+  padding: 10px 12px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  background-color: #f9f9f9;
+  transition: border-color 0.2s;
+}
+
+.storageControls input:focus {
+  border-color: #3b82f6;
+}
+
+.storageControls button {
+  padding: 10px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--color-keyboardButton);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.storageControls button:hover {
+  background-color: #2563eb;
+}
+
+.storageControls button:active {
+  transform: scale(0.96);
+}

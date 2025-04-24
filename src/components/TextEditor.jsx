@@ -120,20 +120,16 @@ export default function TextEditor() {
 
   const handleCloseText = (index) => {
     const shouldSave = window.confirm('Do you want to save before closing?');
-    if (shouldSave) {
-      const fileName = prompt('Enter file name to save:');
-      if (fileName) {
-        localStorage.setItem(fileName, JSON.stringify(texts[index].content));
-        alert(`Saved as "${fileName}"`);
+    if (!shouldSave) {
+      const updated = texts.filter((_, i) => i !== index);
+      setTexts(updated);
+      if (activeIndex === index) {
+        setActiveIndex(null);
+      } else if (activeIndex > index) {
+        setActiveIndex(activeIndex - 1);
       }
     }
-    const updated = texts.filter((_, i) => i !== index);
-    setTexts(updated);
-    if (activeIndex === index) {
-      setActiveIndex(null);
-    } else if (activeIndex > index) {
-      setActiveIndex(activeIndex - 1);
-    }
+
   };
 
   const handleOpenNewText = (newContent) => {

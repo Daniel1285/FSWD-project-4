@@ -1,97 +1,126 @@
+@import './color.module.css';
+
 .keyboard {
-    direction: ltr;
-    text-align: center;
-  }
-  
-  .keyboardRow {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 4px;
-  }
-  
-  .keyboardButton {
-    margin: 4px;
-    padding: 8px;
-    font-size: 22px;
-    min-width: 40px;
-    font-weight: bold;
-    line-height: 1;
-    font-family: system-ui, sans-serif;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .spacebar {
-    width: 200px;
-    font-size: 70px;
-    padding: 8px 40px;
-    text-align: center;
-    border-radius: 6px;
-    cursor: pointer;
-    background-color: #f2f2f2;
-    border: 1px solid #ccc;
-    transition: background-color 0.2s;
-  }
-  
-  .spacebar:hover {
-    background-color: #e0e0e0;
-  }
-  
-  .symbolToggle {
-    margin: 4px;
-    padding: 8px;
-    font-size: 22px;
-    cursor: pointer;
-  }
-  
-  .emojiToggle {
-    margin: 4px;
-    padding: 8px;
-    font-size: 22px;
-    cursor: pointer;
-  }
-  
-  .emojiHoverContainer {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .emojiOverlay {
-    display: none;
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: 8px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 6px 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    z-index: 1;
-    white-space: nowrap;
-    pointer-events: auto;
-  }
-  
-  .emojiHoverContainer::after {
-    content: '';
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    width: 100%;
-    height: 10px;
-    pointer-events: auto;
-  }
-  
-  .emojiHoverContainer:hover .emojiOverlay,
-  .emojiOverlay:hover {
-    display: flex;
-    gap: 6px;
-  }
-  
-  .shiftActive {
-    background-color: #d0e7ff;
-    border: 1px solid #3399ff;
-  }  
+  direction: ltr;
+  text-align: center;
+  background-color: var(--color-bg-keyboard);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  width: 95%;
+}
+
+.keyboardRow {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.keyboardButton {
+  margin: 5px;
+  padding: 14px;
+  font-size: 22px;
+  min-width: 48px;
+  min-height: 48px;
+  font-weight: bold;
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--color-keyboardButton);
+  color: var(--color-text-light);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.keyboardButton:hover {
+  background: #3b3b5c;
+}
+
+.keyboardButton:active {
+  transform: scale(0.96);
+}
+
+.spacebar {
+  width: 200px;
+  font-size: 24px;
+  padding: 14px 40px;
+  border-radius: 14px;
+  cursor: pointer;
+  background-color: var(--color-keyboardButton);
+  color: var(--color-text-light);
+  border: none;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.spacebar:hover {
+  background-color: #444466;
+}
+
+.spacebar:active {
+  transform: scale(0.96);
+}
+
+.symbolToggle,
+.emojiToggle {
+  margin: 5px;
+  padding: 14px;
+  font-size: 22px;
+  background: var(--color-keyboardButton);
+  color: var(--color-text-light);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.symbolToggle:hover,
+.emojiToggle:hover {
+  background: #3b3b5c;
+}
+
+.emojiHoverContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.emojiOverlay {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
+  background-color: var(--color-bg-keyboard);
+  border: 1px solid var(--color-divider);
+  border-radius: 12px;
+  padding: 8px 10px;
+  box-shadow: var(--shadow-medium);
+  z-index: 1;
+  white-space: nowrap;
+  pointer-events: auto;
+}
+
+.emojiHoverContainer::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  pointer-events: auto;
+}
+
+.emojiHoverContainer:hover .emojiOverlay,
+.emojiOverlay:hover {
+  display: flex;
+  gap: 8px;
+}
+
+.shiftActive {
+  background-color: var(--color-primary) !important;
+  color: var(--color-text-light);
+}

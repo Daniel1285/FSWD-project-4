@@ -1,0 +1,24 @@
+:root {
+    --color-bg-main: #f5f7fa;
+    --color-bg-panel: #ffffff;
+    --color-bg-keyboard: #ffffff;
+    --color-keyboardButton: #b7b7bd;
+    
+    --color-border: #d1d9e6;
+    --color-divider: #c0c9d2;
+    
+    --color-primary: #5c6bc0;
+    --color-secondary: #42a5f5;
+    --color-danger: #ef5350;
+    
+    --color-text-main: #2c3e50;
+    --color-text-muted: #7f8c8d;
+    --color-text-light: #ffffff;
+  
+    --color-hover: #e0e7ff;
+
+    --shadow-soft: 0 2px 6px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.12);
+    --radius-default: 8px;
+  }
+  

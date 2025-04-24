@@ -1,48 +1,55 @@
+@import './color.module.css';
+
 .toolbar {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-  }
-  
-  .toolbar select,
-  .toolbar button,
-  .toolbar input[type="color"] {
-    padding: 6px 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .toolbar input[type="color"] {
-    appearance: none;
-    -webkit-appearance: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 0;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    background: none;
-    vertical-align: middle;
-    margin-top: 3px;
-  }
-  
-  .toolbar button:hover {
-    background-color: #e0e0e0;
-  }
-  
-  .styleModeToggle {
-    display: flex;
-    gap: 12px;
-    margin-left: 12px;
-    align-items: center;
-  }
-  
-  .styleModeToggle label {
-    font-size: 12px;
-    cursor: pointer;
-  }
-  
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.toolbar select,
+.toolbar button,
+.toolbar input[type="color"] {
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-default);
+  cursor: pointer;
+  background-color: var(--color-bg-panel);
+  color: var(--color-text-main);
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.toolbar button:hover,
+.toolbar select:hover {
+  background-color: var(--color-hover);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.toolbar input[type="color"] {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-default);
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  background: none;
+  vertical-align: middle;
+  margin-top: 3px;
+}
+
+.styleModeToggle {
+  display: flex;
+  gap: 12px;
+  margin-left: 12px;
+  align-items: center;
+}
+
+.styleModeToggle label {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}

@@ -1,20 +1,29 @@
+@import './color.module.css';
+
 .editControls {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-  
-  .editControls button {
-    padding: 8px 12px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    background-color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .editControls button:hover {
-    background-color: #f0f0f0;
-  }  
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.editControls button {
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-panel);
+  color: var(--color-text-main);
+  border-radius: var(--radius-default);
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.editControls button:hover {
+  background-color: var(--color-hover);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}

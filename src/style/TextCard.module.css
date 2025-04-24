@@ -1,57 +1,67 @@
+@import './color.module.css';
+
 .textCard {
-    width: 280px;
-    min-height: 200px;
-    border: 1px solid #ccc;
-    padding: 8px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #fff;
-    transition: box-shadow 0.2s;
-    position: relative;
-  }
-  
-  .active {
-    border: 2px solid #007bff;
-    background-color: #e9f3ff;
-    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
-  }
-  
-  .cardHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 6px;
-    font-weight: bold;
-  }
-  
-  .cardHeader button {
-    background: #fff0f0;
-    border: 1px solid #ffaaaa;
-    color: #c00;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .cardHeader button:hover {
-    background: #ffe5e5;
-  }
-  
-  .addCard {
-    border: 2px dashed #aaa;
-    background-color: #f9f9f9;
-    color: #666;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    min-height: 200px;
-    text-align: center;
-    transition: background-color 0.2s;
-  }
-  
-  .addCard:hover {
-    background-color: #e7f1ff;
-  }  
+  width: 280px;
+  min-height: 240px;
+  border-radius: var(--radius-default);
+  background-color: var(--color-bg-panel);
+  box-shadow: var(--shadow-soft);
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+  position: relative;
+  border: 2px solid transparent;
+}
+
+.active {
+  border: 2px solid var(--color-primary);
+  background-color: var(--color-hover);
+  box-shadow: 0 0 10px rgba(92, 107, 192, 0.3);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-weight: bold;
+  font-size: 16px;
+  color: var(--color-text-main);
+}
+
+.cardHeader button {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: var(--color-danger);
+  cursor: pointer;
+  padding: 4px;
+  transition: transform 0.2s ease;
+}
+
+.cardHeader button:hover {
+  transform: scale(1.2);
+}
+
+.addCard {
+  border: 2px dashed var(--color-divider);
+  background-color: var(--color-bg-main);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  min-height: 200px;
+  text-align: center;
+  border-radius: var(--radius-default);
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.addCard:hover {
+  background-color: var(--color-hover);
+}

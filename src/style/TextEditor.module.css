@@ -1,40 +1,46 @@
+@import './color.module.css';
+
 .textEditor {
-    max-width: 1000px;
-    margin: 0 auto;
-    background: white;
-    padding: 16px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
-  
-  .textList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  
-  .addCard {
-    width: 280px;
-    min-height: 200px;
-    border: 2px dashed #aaa;
-    background-color: #f9f9f9;
-    color: #666;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.2s;
-  }
-  
-  .addCard:hover {
-    background-color: #e7f1ff;
-  }
-  
-  .cardHeader {
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-  }  
+  /* max-width: 1000px; */
+  margin: 0 auto;
+  /* background: var(--color-bg-panel); */
+  padding: 16px;
+  border-radius: var(--radius-default);
+  box-shadow: var(--shadow-soft);
+}
+
+.textList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.addCard {
+  width: 280px;
+  min-height: 200px;
+  border: 2px dashed var(--color-divider);
+  background-color: var(--color-bg-main);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 500;
+  font-size: 16px;
+  border-radius: var(--radius-default);
+  transition: background-color 0.2s ease;
+}
+
+.addCard:hover {
+  background-color: var(--color-hover);
+}
+
+.cardHeader {
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  color: var(--color-text-main);
+}
