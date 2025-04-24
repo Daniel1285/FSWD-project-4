@@ -1,4 +1,5 @@
-/* .container {
+/* Login Container */
+.loginContainer {
   max-width: 350px;
   margin: 80px auto;
   padding: 30px;
@@ -9,12 +10,14 @@
   text-align: center;
 }
 
-h2 {
+/* Login Title */
+.loginTitle {
   margin-bottom: 20px;
   color: #333;
 }
 
-input {
+/* Login Input Field */
+.loginInput {
   width: 90%;
   padding: 12px;
   margin: 10px 0;
@@ -24,13 +27,14 @@ input {
   transition: 0.3s;
 }
 
-input:focus {
+.loginInput:focus {
   border-color: #4a90e2;
   outline: none;
   box-shadow: 0 0 4px #4a90e277;
 }
 
-.button {
+/* Login Button */
+.buttonLogin {
   width: 100%;
   padding: 12px;
   background: #4a90e2;
@@ -44,14 +48,15 @@ input:focus {
   transition: 0.3s;
 }
 
-button:hover {
+.buttonLogin:hover {
   background-color: #357ab8;
 }
 
-p {
+/* Register Link */
+.registerLink {
   margin-top: 15px;
   color: #555;
   cursor: pointer;
   text-decoration: underline;
   font-size: 14px;
-} */
+}

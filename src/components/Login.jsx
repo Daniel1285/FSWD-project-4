@@ -16,12 +16,12 @@ function Login({ onToggle, onLogin }) {
   };
 
   return (
-    <div className={styles.container}>
-      <h2>Login</h2>
-      <input placeholder="Username" onChange={e => setUsername(e.target.value)} />
-      <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-      <button  onClick={handleLogin}>Login</button>
-      <p onClick={onToggle}>Don't have an account? Register</p>
+    <div className={styles.loginContainer}>
+      <h2 className={styles.loginTitle}>Login</h2>
+      <input className={styles.loginInput} placeholder="Username" onChange={e => setUsername(e.target.value)} />
+      <input className={styles.loginInput} type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+      <button className={styles.buttonLogin} onClick={handleLogin}>Login</button>
+      <p className={styles.registerLink} onClick={onToggle}>Don't have an account? Register</p>
     </div>
   );
 }
