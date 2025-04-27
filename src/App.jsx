@@ -31,6 +31,8 @@ export default function App() {
   
   return (
       <div>
+        <h1 style={{ textAlign: 'center', color: '#333' }}>Text Editor</h1>
+        
         <div className={styles.appContainer}></div> 
         <div className={styles.topRight}>
           {currentUser ? (
@@ -57,8 +59,7 @@ export default function App() {
           </div>
           
         )}
-        
-        <h1 style={{ textAlign: 'center' }}>Visual text editor</h1>
+    
         <TextEditor />
       </div>
   );

@@ -8,12 +8,10 @@
   border-radius: 20px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
   display: inline-block;
-  width: 95%;
+  width: auto;
 }
 
 .keyboardRow {
-  display: flex;
-  justify-content: center;
   margin-bottom: 6px;
 }
 
@@ -46,9 +44,10 @@
 
 .spacebar {
   width: 200px;
-  font-size: 24px;
-  padding: 14px 40px;
+  font-size: 30px;
+  padding: 10px 40px;
   border-radius: 14px;
+  margin: 0 5px 0 5px;
   cursor: pointer;
   background-color: var(--color-keyboardButton);
   color: var(--color-text-light);
