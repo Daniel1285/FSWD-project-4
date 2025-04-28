@@ -41,11 +41,9 @@ export default function VirtualKeyboard(props) {
     onShiftClick
   } = props;
 
-  const keys = emojiMode
-    ? keyboards.emoji
-    : symbolMode
-      ? keyboards.symbol
-      : keyboards[language];
+  const keys = emojiMode? keyboards.emoji
+    : symbolMode? keyboards.symbol
+    : keyboards[language];
 
   const rows = [];
   if (emojiMode || symbolMode) {
