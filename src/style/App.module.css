@@ -5,6 +5,11 @@ body {
   background: var(--color-keyboardButton);
 }
 
+.title{
+  text-align: center;
+  color: '#333' 
+}
+
 .appContainer {
     height: 1rem;
     position: relative;

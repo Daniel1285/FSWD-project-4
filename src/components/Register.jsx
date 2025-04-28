@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from '../style/Register.module.css';
 
-export default function Register({ onToggle }) {
+function Register({ onToggle }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -61,3 +61,5 @@ export default function Register({ onToggle }) {
     </div>
   );
 }
+
+export default Register;

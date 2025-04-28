@@ -1,7 +1,7 @@
 import React from 'react';
 import style from '../style/TextDisplay.module.css';
 
-export default function TextDisplay({ text, searchChar }) {
+function TextDisplay({ text, searchChar }) {
   return (
     <div className={style.textDisplay}>
       {text.map((item, index) => (
@@ -21,3 +21,5 @@ export default function TextDisplay({ text, searchChar }) {
     </div>
   );
 }
+
+export default TextDisplay;
