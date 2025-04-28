@@ -8,7 +8,7 @@
   border-radius: 20px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
   display: inline-block;
-  width: auto;
+  width: 50%;
 }
 
 .keyboardRow {
